@@ -1,8 +1,6 @@
-// Sincronizar las letras con la canción
 var audio = document.querySelector("audio");
 var lyrics = document.querySelector("#lyrics");
 
-// Array de objetos que contiene cada línea y su tiempo de aparición en segundos
 var lyricsData = [
   { text: "I just can't get you out of my head", time: 15 },
   { text: "Girl, your loving is all I think about", time: 19 },
@@ -27,7 +25,6 @@ var lyricsData = [
   { text: "I love you too much darling", time: 192 },
 ];
 
-// Animar las letras
 function updateLyrics() {
   var time = Math.floor(audio.currentTime);
   var currentLine = lyricsData.find(
@@ -35,32 +32,27 @@ function updateLyrics() {
   );
 
   if (currentLine) {
-    // Calcula la opacidad basada en el tiempo en la línea actual
-    var fadeInDuration = 0.1; // Duración del efecto de aparición en segundos
+    var fadeInDuration = 0.1;
     var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
-
-    // Aplica el efecto de aparición
     lyrics.style.opacity = opacity;
     lyrics.innerHTML = currentLine.text;
   } else {
-    // Restablece la opacidad y el contenido si no hay una línea actual
     lyrics.style.opacity = 0;
     lyrics.innerHTML = "";
   }
 }
 
-setInterval(updateLyrics, 1000);
+// Iniciar la sincronización de letras cuando el audio comience a reproducirse
+audio.addEventListener("play", () => {
+  setInterval(updateLyrics, 1000);
+});
 
-//funcion titulo
-// Función para ocultar el título después de 216 segundos
 function ocultarTitulo() {
   var titulo = document.querySelector(".titulo");
-  titulo.style.animation =
-    "fadeOut 3s ease-in-out forwards"; /* Duración y función de temporización de la desaparición */
+  titulo.style.animation = "fadeOut 3s ease-in-out forwards";
   setTimeout(function () {
     titulo.style.display = "none";
-  }, 3000); // Espera 3 segundos antes de ocultar completamente
+  }, 3000);
 }
 
-// Llama a la función después de 216 segundos (216,000 milisegundos)
 setTimeout(ocultarTitulo, 216000);
