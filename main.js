@@ -1,6 +1,8 @@
 onload = () =>{
     document.body.classList.remove("container");
+    document.body.classList.add("container-reset"); // Agrega una nueva clase
 };
+
 
 var audio = document.getElementById("audio");
 var playButton = document.getElementById("playButton");
