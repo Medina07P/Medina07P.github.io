@@ -1657,3 +1657,55 @@ h1 {
 }
 
 /* Agregar más estilos según sea necesario */
+/* Añade prefijos -webkit- para animaciones */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.titulo {
+  margin-bottom: 180px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  color: yellow;
+  position: absolute;
+  font-weight: bold;
+  letter-spacing: 10px;
+  opacity: 0;
+  -webkit-animation: fadeIn 3s ease-in-out forwards; /* Prefijo para Safari */
+  animation: fadeIn 3s ease-in-out forwards;
+  text-align: center;
+}
+
+/* Añade prefijos -webkit- para otras animaciones si es necesario */
+@-webkit-keyframes moving-flower-1 {
+  0%,
+  100% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes moving-flower-1 {
+  0%,
+  100% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+}
