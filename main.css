@@ -1603,6 +1603,13 @@ body {
     transform: scale(0);
   }
 }
+
+.container-reset {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .container * {
   -webkit-animation-play-state: paused !important;
   animation-play-state: paused !important;
