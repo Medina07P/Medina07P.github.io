@@ -1,5 +1,6 @@
 var audio = document.querySelector("audio");
 var lyrics = document.querySelector("#lyrics");
+var animationFrame;
 
 var lyricsData = [
   { text: "I just can't get you out of my head", time: 15 },
@@ -32,7 +33,7 @@ function updateLyrics() {
   );
 
   if (currentLine) {
-    var fadeInDuration = 0.1;
+    var fadeInDuration = 0.5; // Duración más fluida
     var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
     lyrics.style.opacity = opacity;
     lyrics.innerHTML = currentLine.text;
@@ -40,19 +41,31 @@ function updateLyrics() {
     lyrics.style.opacity = 0;
     lyrics.innerHTML = "";
   }
+
+  animationFrame = requestAnimationFrame(updateLyrics);
 }
 
-// Iniciar la sincronización de letras cuando el audio comience a reproducirse
+// Iniciar sincronización cuando el audio se reproduzca
 audio.addEventListener("play", () => {
-  setInterval(updateLyrics, 1000);
+  cancelAnimationFrame(animationFrame);
+  updateLyrics();
 });
 
+// Detener actualización cuando se pausa el audio
+audio.addEventListener("pause", () => {
+  cancelAnimationFrame(animationFrame);
+});
+
+// Ocultar título después de cierto tiempo
 function ocultarTitulo() {
   var titulo = document.querySelector(".titulo");
-  titulo.style.animation = "fadeOut 3s ease-in-out forwards";
-  setTimeout(function () {
-    titulo.style.display = "none";
-  }, 3000);
+  if (titulo) {
+    titulo.style.animation = "fadeOut 3s ease-in-out forwards";
+    setTimeout(() => {
+      titulo.style.display = "none";
+    }, 3000);
+  }
 }
 
 setTimeout(ocultarTitulo, 216000);
+
